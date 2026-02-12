@@ -14,7 +14,7 @@ struct ContentView: View {
                 .font(.system(size: 50))
                 .foregroundStyle(.green)
             HStack{
-                Text("Hello, Cohort 7!")
+                Text("Hello, Cohort 7!!!!")
                 Text("This is my first app on 101")
             }
         }
