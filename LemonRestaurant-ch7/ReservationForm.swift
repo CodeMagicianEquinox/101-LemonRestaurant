@@ -9,45 +9,62 @@ import SwiftUI
 
 struct ReservationForm: View {
     let restaurantName = "Little Lemon"
-    let maxGuest = 10
-    // state variables
-    // "if this changes, update the UI"
+    let maxGuests = 10
+
     @State private var userName = ""
     @State private var guestCount = 1
+
+    
+    @State private var childrenCount = 0
+    @State private var occasion = ""
+
     @State private var phoneNumber = ""
     @State private var previewText = ""
-    
+
     var body: some View {
-        Form{
-            //header
-            Section{
+        Form {
+            // Header
+            Section {
                 Text(restaurantName)
                     .font(.title3)
                     .bold()
+
                 Text("Reservation form")
                     .foregroundColor(.secondary)
             }
-            Section{
-                //$ this value can read + write
-                TextField("Name",text:$userName)
-                    .textInputAutocapitalization(.words)
-                    .autocorrectionDisabled(true)
+
+            Section {
+                TextField("Name", text: $userName)
+                    .disableAutocorrection(true)
+
+                Stepper("Guests: \(guestCount)", value: $guestCount, in: 1...maxGuests)
+
+    
+                Stepper("Children: \(childrenCount)", value: $childrenCount, in: 0...5)
+
                 
-                Stepper("Guest: \(guestCount)", value:$guestCount, in: 1...maxGuest)
+                TextField("Occasion (Birthday, Anniversary, etc.)", text: $occasion)
+                    .disableAutocorrection(true)
+
                 
-                TextField("Phone", text:$phoneNumber)
-                    .keyboardType(.numberPad)
-                
-                Button("Preview reservation"){
+                TextField("Phone", text: $phoneNumber)
+                    .keyboardType(.phonePad)
+
+                Button("Preview reservation") {
                     previewText =
                     """
-                    Name" \(userName)
+                    Name: \(userName)
                     Guests: \(guestCount)
+                    Children: \(childrenCount)
+                    Occasion: \(occasion)
                     Phone: \(phoneNumber)
                     """
                 }
-                
-                Text(previewText)
+
+                // Display the reservation info
+                if !previewText.isEmpty {
+                    Text(previewText)
+                }
             }
         }
     }
