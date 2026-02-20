@@ -32,12 +32,18 @@ struct AboutView: View {
                     .font(.system(size: 24))
                     .foregroundStyle(.yellow)
 
-                Image(systemName: "map")
+                Image(systemName: "leaf")
                     .font(.system(size: 24))
                     .foregroundStyle(.yellow)
             }
             .padding(.top, 8)
 
         }
+    }
+}
+
+#Preview {
+    NavigationStack{
+        AboutView()
     }
 }
